@@ -1,0 +1,190 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #282c34;
+  color: white;
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 0 32px;
+}
+
+button {
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  line-height: normal;
+  overflow: visible;
+  cursor: pointer;
+  outline: none;
+}
+
+#title {
+  font-size: 3em;
+  text-align: center;
+}
+
+#selects-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  min-width: 250px;
+}
+
+.select-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.select-container label {
+  font-size: 1.1em;
+  text-align: center;
+}
+
+.select-container select {
+  margin-top: 16px;
+  padding: 6px;
+  background-color: #071928;
+  border: 1px solid #173956;
+  font-size: 1em;
+  color: white;
+  text-align: center;
+}
+
+#board-container {
+  position: relative;
+  flex-grow: 1;
+  width: 100%;
+  min-width: 250px;
+  max-width: 1000px;
+  min-height: 250px;
+  max-height: 1000px;
+  margin: 32px 0;
+}
+
+#board {
+  display: grid;
+  grid-template-rows: repeat(var(--boardSize, 3), 1fr);
+  grid-template-columns: repeat(var(--boardSize, 3), 1fr);
+  width: 100%;
+  height: 100%;
+  grid-gap: 0.8%;
+  background-color: #071928;
+}
+
+@keyframes BoardOverlayAnimation {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 0;
+    font-size: 0;
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.75);
+    opacity: 1;
+    font-size: 1em;
+  }
+}
+
+#board-overlay {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  animation-name: BoardOverlayAnimation;
+  animation-duration: 0.8s;
+  animation-delay: 0.4s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
+
+#board-overlay-message {
+  padding: 32px;
+  font-size: 3em;
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#board-overlay-message.player-X::before {
+  color: #d8a9ed;
+  font-size: 3.5em;
+  content: "X";
+}
+
+#board-overlay-message.player-O::before {
+  content: "O";
+  font-size: 3.5em;
+  color: #FFD699;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #092842;
+  font-size: var(--cellFontSize, 4em);
+  text-align: center;
+}
+
+.cell:hover:not(.O,.X) {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.cell.player-X:hover {
+  background-color: #d8a9ed;
+}
+
+.cell.player-X:hover::after {
+  content: "X";
+}
+
+.cell.player-O:hover {
+  background-color: #FFD699;
+}
+
+.cell.player-O:hover::after {
+  content: "O";
+}
+
+.cell.X {
+  color: #d8a9ed;
+  cursor: default;
+}
+
+.cell.O {
+  color: #FFD699;
+  cursor: default;
+}
+
+#action-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  min-width: 250px;
+  margin-bottom: 32px;
+}
+
+.action-button {
+  background-color: #071928;
+  padding: 16px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+}
+
+.action-button[disabled] {
+  background-color: #555;
+  cursor: default;
+}
+
+.action-button i {
+  margin-right: 6px;
+}
